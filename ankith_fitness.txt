@@ -1,0 +1,532 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Feb 03, 2022 at 08:12 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.11
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `ankith_fitness`
+--
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertData` (IN `in_username` VARCHAR(40), IN `in_gender` VARCHAR(8), IN `in_mobile` VARCHAR(20), IN `in_email` VARCHAR(20), IN `in_dob` VARCHAR(10), IN `in_joining_date` VARCHAR(10), IN `in_userid` VARCHAR(20))  BEGIN
+INSERT INTO users(username, gender, mobile, email, dob, joining_date, userid) VALUES(in_username,in_gender,in_mobile,in_email,in_dob,in_joining_date,in_userid);
+END$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `address`
+--
+
+CREATE TABLE `address` (
+  `id` varchar(20) NOT NULL,
+  `streetName` varchar(40) NOT NULL,
+  `state` varchar(15) NOT NULL,
+  `city` varchar(15) NOT NULL,
+  `zipcode` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `address`
+--
+
+INSERT INTO `address` (`id`, `streetName`, `state`, `city`, `zipcode`) VALUES
+('1643398911', 'Ujjodi', 'Karnataka', 'Mangalore', '575002'),
+('1643399186', 'Bajpe', 'Karnataka', 'Mangalore', '575234'),
+('1643401116', 'Valencia', 'Karnataka', 'Mangalore', '575003'),
+('1643401283', 'PVS', 'Karnataka', 'Mangalore', '575007'),
+('1643401425', 'Kadwad', 'Karnataka', 'Karwar', '581339'),
+('1643401590', 'Pumpwell', 'Karnataka', 'Mangalore', '575002'),
+('1643401763', 'Jyothi', 'Karnataka', 'Mangalore', '575005'),
+('1643402019', 'Ullal', 'Karnataka', 'Mangalore', '575004'),
+('1643402189', 'Pumpwell', 'Karnataka', 'Mangalore', '575006'),
+('1643560717', 'BC road', 'Karnataka', 'Mangalore', '575009'),
+('1643687724', 'aaaaaaaaa', 'Karnataka', 'Mangalore', '575002'),
+('1643704838', 'njknkjn', 'Karnataka', 'Mangalore', '575002');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(500) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `fname` varchar(50) NOT NULL,
+  `lname` varchar(500) NOT NULL,
+  `gender` varchar(500) NOT NULL,
+  `dob` text NOT NULL,
+  `contact` text NOT NULL,
+  `address` varchar(500) NOT NULL,
+  `image` varchar(2000) NOT NULL,
+  `created_on` date NOT NULL,
+  `group_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `email`, `password`, `fname`, `lname`, `gender`, `dob`, `contact`, `address`, `image`, `created_on`, `group_id`) VALUES
+(1, 'ankith', 'ankithkumar534@gmail.com', 'aa7f019c326413d5b8bcad4314228bcd33ef557f5d81c7cc977f7728156f4357', 'Ankith', 'S', 'Male', '2000-07-01', '+919108660902', 'Pumpwell, Mangalore', 'anki4.jpg', '2022-01-01', 1),
+(2, 'Anmol', 'anmol234@gmail.com', 'aa7f019c326413d5b8bcad4314228bcd33ef557f5d81c7cc977f7728156f4357', 'Anmol', 'R', 'Male', '2001-04-25', '91919191', 'karwar,goa', 'anki4.jpg', '2022-02-02', 2),
+(3, 'FitStation', 'fitstation09@gmail.com', 'aa7f019c326413d5b8bcad4314228bcd33ef557f5d81c7cc977f7728156f4357', 'Ankith', 'S', 'Male', '200-07-01', '91919191', 'Pumpwell, Mangalore', 'anki4.jpg', '2022-07-02', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `enrolls_to`
+--
+
+CREATE TABLE `enrolls_to` (
+  `et_id` int(5) NOT NULL,
+  `pid` varchar(8) NOT NULL,
+  `uid` varchar(20) NOT NULL,
+  `paid_date` varchar(15) DEFAULT NULL,
+  `expire` varchar(15) DEFAULT NULL,
+  `renewal` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `enrolls_to`
+--
+
+INSERT INTO `enrolls_to` (`et_id`, `pid`, `uid`, `paid_date`, `expire`, `renewal`) VALUES
+(1, 'WILTPX', '1643398911', '2022-01-29', '2022-11-29', 'yes'),
+(2, 'PKCLQF', '1643399186', '2022-01-29', '2022-07-29', 'yes'),
+(4, 'MQAZXG', '1643401116', '2022-01-29', '2023-07-29', 'yes'),
+(5, 'WILTPX', '1643401283', '2022-01-29', '2022-11-29', 'yes'),
+(6, 'LBSFOM', '1643401425', '2022-01-29', '2022-04-29', 'yes'),
+(7, 'MQAZXG', '1643401590', '2022-01-29', '2023-07-29', 'yes'),
+(8, 'PKCLQF', '1643401763', '2022-01-29', '2022-07-29', 'yes'),
+(9, 'UIQTGO', '1643402019', '2022-01-29', '2023-01-29', 'yes'),
+(10, 'MQAZXG', '1643402189', '2022-01-29', '2023-07-29', 'yes'),
+(20, 'LBSFOM', '1643560717', '2022-01-30', '2022-04-30', 'yes'),
+(28, 'UIQTGO', '1643687724', '2022-02-01', '2023-02-01', 'yes'),
+(30, 'LBSFOM', '1643704838', '2022-02-01', '2022-05-01', 'yes');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `health_status`
+--
+
+CREATE TABLE `health_status` (
+  `hid` int(5) NOT NULL,
+  `calorie` varchar(8) DEFAULT NULL,
+  `height` varchar(8) DEFAULT NULL,
+  `weight` varchar(8) DEFAULT NULL,
+  `fat` varchar(8) DEFAULT NULL,
+  `remarks` varchar(200) DEFAULT NULL,
+  `uid` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `health_status`
+--
+
+INSERT INTO `health_status` (`hid`, `calorie`, `height`, `weight`, `fat`, `remarks`, `uid`) VALUES
+(1, NULL, NULL, NULL, NULL, NULL, '1643398911'),
+(2, '1500', '5', '65', '30', 'Focus on calorie deficit', '1643399186'),
+(4, NULL, NULL, NULL, NULL, NULL, '1643401116'),
+(5, NULL, NULL, NULL, NULL, NULL, '1643401283'),
+(6, '2500', '5.6', '51', '12%', 'Goal is to loose fat', '1643401425'),
+(7, NULL, NULL, NULL, NULL, NULL, '1643401590'),
+(8, NULL, NULL, NULL, NULL, NULL, '1643401763'),
+(9, NULL, NULL, NULL, NULL, NULL, '1643402019'),
+(10, NULL, NULL, NULL, NULL, NULL, '1643402189'),
+(20, NULL, NULL, NULL, NULL, NULL, '1643560717'),
+(27, NULL, NULL, NULL, NULL, NULL, '1643687724'),
+(29, NULL, NULL, NULL, NULL, NULL, '1643704838');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logs`
+--
+
+CREATE TABLE `logs` (
+  `id` int(11) NOT NULL,
+  `userid` varchar(20) NOT NULL,
+  `action` varchar(40) NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `logs`
+--
+
+INSERT INTO `logs` (`id`, `userid`, `action`, `date`) VALUES
+(4, '1643398911', 'Data Inserted Succesfully', '2022-01-29 01:15:52'),
+(5, '1643399186', 'Data Inserted Succesfully', '2022-01-29 01:18:57'),
+(6, '1643399186', 'Data Updated Succesfully', '2022-01-29 01:22:20'),
+(7, '1643399186', 'Data Updated Succesfully', '2022-01-29 01:22:37'),
+(8, '1643399186', 'Data Updated Succesfully', '2022-01-29 01:22:51'),
+(9, '1643398911', 'Data Updated Succesfully', '2022-01-29 01:44:53'),
+(10, '1643399186', 'Data Updated Succesfully', '2022-01-29 01:44:59'),
+(11, '1643400918', 'Data Inserted Succesfully', '2022-01-29 01:48:17'),
+(12, '1643401116', 'Data Inserted Succesfully', '2022-01-29 01:50:25'),
+(13, '1643401283', 'Data Inserted Succesfully', '2022-01-29 01:53:43'),
+(14, '1643401425', 'Data Inserted Succesfully', '2022-01-29 01:55:46'),
+(15, '1643401590', 'Data Inserted Succesfully', '2022-01-29 01:59:09'),
+(16, '1643401763', 'Data Inserted Succesfully', '2022-01-29 02:01:56'),
+(17, '1643402019', 'Data Inserted Succesfully', '2022-01-29 02:05:26'),
+(18, '1643402189', 'Data Inserted Succesfully', '2022-01-29 02:11:20'),
+(19, '1643400918', 'Data Updated Succesfully', '2022-01-29 02:11:47'),
+(20, '1643401116', 'Data Updated Succesfully', '2022-01-29 02:11:59'),
+(21, '1643401283', 'Data Updated Succesfully', '2022-01-29 02:12:07'),
+(22, '1643401425', 'Data Updated Succesfully', '2022-01-29 02:12:15'),
+(23, '1643401590', 'Data Updated Succesfully', '2022-01-29 02:12:21'),
+(24, '1643401763', 'Data Updated Succesfully', '2022-01-29 02:12:26'),
+(25, '1643402019', 'Data Updated Succesfully', '2022-01-29 02:12:30'),
+(26, '1643402189', 'Data Updated Succesfully', '2022-01-29 02:12:38'),
+(27, '1643402189', 'Data Updated Succesfully', '2022-01-29 02:12:44'),
+(28, '1643472585', 'Data Inserted Succesfully', '2022-01-29 21:40:32'),
+(29, '1643472647', 'Data Inserted Succesfully', '2022-01-29 21:41:07'),
+(30, '1643473011', 'Data Inserted Succesfully', '2022-01-29 21:48:10'),
+(31, '1643473503', 'Data Inserted Succesfully', '2022-01-29 21:58:47'),
+(32, '1643473762', 'Data Inserted Succesfully', '2022-01-29 22:08:28'),
+(33, '1643474462', 'Data Inserted Succesfully', '2022-01-29 22:11:42'),
+(34, '1643474462', 'User Deleted Succesfully', '2022-01-29 22:11:42'),
+(35, '1643474626', 'Data Inserted Succesfully', '2022-01-29 22:14:00'),
+(36, '1643474832', 'Data Inserted Succesfully', '2022-01-29 22:17:47'),
+(37, '1643474993', 'Data Inserted Succesfully', '2022-01-29 22:20:27'),
+(38, '1643474993', 'User Deleted Succesfully', '2022-01-29 22:20:46'),
+(39, '1643474832', 'User Deleted Succesfully', '2022-01-30 22:06:05'),
+(40, '1643474626', 'User Deleted Succesfully', '2022-01-30 22:06:12'),
+(41, '1643473762', 'User Deleted Succesfully', '2022-01-30 22:06:16'),
+(42, '1643473503', 'User Deleted Succesfully', '2022-01-30 22:06:21'),
+(43, '1643473011', 'User Deleted Succesfully', '2022-01-30 22:06:26'),
+(44, '1643472647', 'User Deleted Succesfully', '2022-01-30 22:08:22'),
+(45, '1643472585', 'User Deleted Succesfully', '2022-01-30 22:08:33'),
+(46, '1643560717', 'Data Inserted Succesfully', '2022-01-30 22:10:31'),
+(47, '1643601644', 'Data Inserted Succesfully', '2022-01-31 09:33:03'),
+(48, '1643602262', 'Data Inserted Succesfully', '2022-01-31 09:41:28'),
+(49, '1643602317', 'Data Inserted Succesfully', '2022-01-31 09:42:16'),
+(50, '1643603079', 'Data Inserted Succesfully', '2022-01-31 09:55:00'),
+(51, '1643401425', 'Data Updated Succesfully', '2022-01-31 10:06:37'),
+(52, '1643602317', 'User Deleted Succesfully', '2022-01-31 11:41:31'),
+(53, '1643603079', 'User Deleted Succesfully', '2022-01-31 11:41:38'),
+(54, '1643602262', 'User Deleted Succesfully', '2022-01-31 11:41:47'),
+(55, '1643400918', 'User Deleted Succesfully', '2022-01-31 11:41:54'),
+(56, '1643601644', 'User Deleted Succesfully', '2022-01-31 11:42:03'),
+(57, '1643617911', 'Data Inserted Succesfully', '2022-01-31 14:03:42'),
+(58, '1643687695', 'Data Inserted Succesfully', '2022-02-01 09:25:12'),
+(59, '1643687695', 'User Deleted Succesfully', '2022-02-01 09:25:12'),
+(60, '1643687724', 'Data Inserted Succesfully', '2022-02-01 09:25:35'),
+(61, '1643617911', 'User Deleted Succesfully', '2022-02-01 09:32:47'),
+(62, '1643704725', 'Data Inserted Succesfully', '2022-02-01 14:10:31'),
+(63, '1643704725', 'User Deleted Succesfully', '2022-02-01 14:10:31'),
+(64, '1643704838', 'Data Inserted Succesfully', '2022-02-01 14:11:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `manage_website`
+--
+
+CREATE TABLE `manage_website` (
+  `id` int(11) NOT NULL,
+  `title` varchar(600) NOT NULL,
+  `short_title` varchar(600) NOT NULL,
+  `logo` text NOT NULL,
+  `footer` text NOT NULL,
+  `currency_code` varchar(600) NOT NULL,
+  `currency_symbol` varchar(600) NOT NULL,
+  `login_logo` text NOT NULL,
+  `invoice_logo` text NOT NULL,
+  `background_login_image` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `manage_website`
+--
+
+INSERT INTO `manage_website` (`id`, `title`, `short_title`, `logo`, `footer`, `currency_code`, `currency_symbol`, `login_logo`, `invoice_logo`, `background_login_image`) VALUES
+(1, 'FitStation-Ankith & Anmol', 'Fistation', 'anki1.jpg', 'Fitstaion-Ankith & Anmol', 'INR', 'â‚¹', 'anki1.jpg', 'anki1.jpg', 'anki3.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `plan`
+--
+
+CREATE TABLE `plan` (
+  `pid` varchar(8) NOT NULL,
+  `planName` varchar(20) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `validity` varchar(20) NOT NULL,
+  `amount` int(10) NOT NULL,
+  `active` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `plan`
+--
+
+INSERT INTO `plan` (`pid`, `planName`, `description`, `validity`, `amount`, `active`) VALUES
+('BVFXQI', 'edxed', 'deed', '2', 2000, 'no'),
+('KFVRTI', 'Intermidiate I1', 'You can choose this if you have traning experience of atleast 5 to 6 months.', '8', 6400, 'yes'),
+('LBSFOM', 'Basic B1', ' This plan is designed for those individuals who are begginers and have no training experience.', '3', 2400, 'yes'),
+('MQAZXG', 'Advanced A2', 'If you have traning experience of almost 2 to 4 years then you can go with this plan.', '18', 14400, 'yes'),
+('PKCLQF', 'Basic B2', 'This plan is designed for those individuals who has atleast some training experience', '6', 4800, 'yes'),
+('UIQTGO', 'Advanced A1 ', 'This plan is for those individuals who has a training experience of more then a year', '12', 9600, 'yes'),
+('WILTPX', 'Intermidate I2', 'This plan is for those individuals who has a traning experience of 8 to 10 months or even almost a year.', '10', 8000, 'yes');
+
+--
+-- Triggers `plan`
+--
+DELIMITER $$
+CREATE TRIGGER `before_insert_amount` BEFORE INSERT ON `plan` FOR EACH ROW BEGIN  
+IF NEW.amount < 0 THEN SET NEW.amount = 0;  
+END IF;  
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `before_insert_validity` BEFORE INSERT ON `plan` FOR EACH ROW BEGIN  
+IF NEW.validity < 0 THEN SET NEW.validity = 0;  
+END IF;  
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `timetable`
+--
+
+CREATE TABLE `timetable` (
+  `tid` int(12) NOT NULL,
+  `tname` varchar(45) DEFAULT NULL,
+  `day1` varchar(200) DEFAULT NULL,
+  `day2` varchar(200) DEFAULT NULL,
+  `day3` varchar(200) DEFAULT NULL,
+  `day4` varchar(200) DEFAULT NULL,
+  `day5` varchar(200) DEFAULT NULL,
+  `day6` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `timetable`
+--
+
+INSERT INTO `timetable` (`tid`, `tname`, `day1`, `day2`, `day3`, `day4`, `day5`, `day6`) VALUES
+(2, 'Level-5', 'Flat bench barbell press - 4 sets of 8-12 reps\r\nIncline dumbell press - 4 sets of 8-12 reps\r\nIncline dumbell flyers - 3 set of 10 reps\r\nCable crossovers - 3 sets of 15 reps\r\nPush-ups - 4sets', 'Flat bench barbell press - 4 sets of 8-12 reps\r\nIncline dumbell press - 4 sets of 8-12 reps\r\nIncline dumbell flyers - 3 set of 10 reps\r\nCable crossovers - 3 sets of 15 reps\r\nPush-ups - 4sets', 'Barbell squats - 4 sets of 8-10 reps\r\nHeck squats - 4 sets of 10 reps\r\nLeg press machine -3 sets of 10 reps', 'Chin-ups - 4 sets of 10 reps\r\nWide grip lat pull-downs - 4 sets of 12 reps\r\nClose grip lat pull downs - 4 set of 12 reps\r\nDumbbell rows - 4 sets of 8-10 reps', 'Double arm dumbbell curls - 4 sets of 10-12 reps\r\nEZ bar curls - 4 sets of 10-12 reps\r\nPreacher curl machine - 4 sets of 12 reps\r\nTriceps rope machine - 4 sets of 15 reps', '60 minute of steady state cardio..'),
+(3, 'Level-4', 'pull-ups,latpull-downs,cable rows,face pulls,biceps curls,preacher curls', 'barbell bench press, incline dumbell press, cable flies, lateral raises, skull crusher, tricep cable push downs', 'squats,leg extension ,lunges,rdl,standing calves raises,cable crunches,leg raises', 'pull-ups,latpull-downs,cable rows,face pulls,biceps curls,preacher curls', 'barbell bench press, incline dumbell press, cable flies, lateral raises, skull crusher, tricep cable pushdowns', 'Boxing , Crdio'),
+(4, 'Level 6', 'Push day', 'Pull day', 'Leg day', 'Push day', 'Pull day', 'Martial Arts, Boxing');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `userid` varchar(20) NOT NULL,
+  `username` varchar(40) NOT NULL,
+  `gender` varchar(8) NOT NULL,
+  `mobile` varchar(20) NOT NULL,
+  `email` varchar(20) NOT NULL,
+  `dob` varchar(10) NOT NULL,
+  `joining_date` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`userid`, `username`, `gender`, `mobile`, `email`, `dob`, `joining_date`) VALUES
+('1643398911', 'Sharwan', 'Male', '9989765213', 'sharwan123@gmail.com', '1996-10-05', '2022-01-05'),
+('1643399186', 'Deekshitha', 'Female', '9928654335', 'deekshitha456@gmail.', '2001-06-15', '2022-01-15'),
+('1643401116', 'Vidath', 'Male', '8983457121', 'vidath787@gmail.com', '1996-08-07', '2022-01-07'),
+('1643401283', 'Aaron', 'Male', '9230492012', 'aaron189@gmail.com', '2001-11-25', '2022-01-16'),
+('1643401425', 'Prapti', 'Female', '9892381563', 'prapti333@gmail.com', '2005-01-29', '2022-01-11'),
+('1643401590', 'Saketh', 'Male', '9890763421', 'saketh09@gmail.com', '2000-07-07', '2022-01-09'),
+('1643401763', 'Aryan', 'Male', '8972347181', 'aryan778@gmail.com', '1999-12-21', '2021-11-25'),
+('1643402019', 'Aman', 'Male', '9992282838', 'aman111@gmail.com', '2001-01-26', '2021-12-30'),
+('1643402189', 'Arpith', 'Male', '9856743190', 'arpith09@gmail.com', '1995-06-01', '2021-09-22'),
+('1643560717', 'Pramith', 'Male', '7898799832', 'pramith380@gmail.com', '1998-11-04', '2022-01-13'),
+('1643687724', 'Ankith S', 'Female', '9108660902', 'ankiths.is19@sahyadr', '2022-02-11', '2022-02-25'),
+('1643704838', 'Ankith S', 'Male', '9108660902', 'ankiths.9@sahyadri.e', '2000-01-01', '2013-01-03');
+
+--
+-- Triggers `users`
+--
+DELIMITER $$
+CREATE TRIGGER `check_age` BEFORE INSERT ON `users` FOR EACH ROW BEGIN
+IF TIMESTAMPDIFF(YEAR, NEW.dob, CURDATE()) < 12 THEN
+SIGNAL SQLSTATE '45000'
+SET MESSAGE_TEXT = 'USER AGE MUST BE ATLEAST 12 YEARS OLD!';
+END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `deleteUser` BEFORE DELETE ON `users` FOR EACH ROW INSERT INTO logs VALUES(null, OLD.userid, "User Deleted Succesfully", NOW() )
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `insertUser` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO logs VALUES(null, NEW.userid, "Data Inserted Succesfully", NOW())
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `updateUser` AFTER UPDATE ON `users` FOR EACH ROW INSERT INTO logs VALUES(null, NEW.userid, "Data Updated Succesfully", NOW() )
+$$
+DELIMITER ;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `address`
+--
+ALTER TABLE `address`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userID` (`id`) USING BTREE;
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `enrolls_to`
+--
+ALTER TABLE `enrolls_to`
+  ADD PRIMARY KEY (`et_id`) USING BTREE,
+  ADD KEY `user_ID` (`uid`) USING BTREE,
+  ADD KEY `plan_ID_idx` (`pid`) USING BTREE;
+
+--
+-- Indexes for table `health_status`
+--
+ALTER TABLE `health_status`
+  ADD PRIMARY KEY (`hid`) USING BTREE,
+  ADD KEY `userID_idx` (`uid`) USING BTREE;
+
+--
+-- Indexes for table `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `manage_website`
+--
+ALTER TABLE `manage_website`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `plan`
+--
+ALTER TABLE `plan`
+  ADD PRIMARY KEY (`pid`) USING BTREE,
+  ADD KEY `pid` (`pid`) USING BTREE;
+
+--
+-- Indexes for table `timetable`
+--
+ALTER TABLE `timetable`
+  ADD PRIMARY KEY (`tid`) USING BTREE;
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`userid`) USING BTREE,
+  ADD UNIQUE KEY `email` (`email`) USING BTREE,
+  ADD KEY `userid` (`userid`) USING BTREE;
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `enrolls_to`
+--
+ALTER TABLE `enrolls_to`
+  MODIFY `et_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `health_status`
+--
+ALTER TABLE `health_status`
+  MODIFY `hid` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+
+--
+-- AUTO_INCREMENT for table `manage_website`
+--
+ALTER TABLE `manage_website`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `timetable`
+--
+ALTER TABLE `timetable`
+  MODIFY `tid` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `address`
+--
+ALTER TABLE `address`
+  ADD CONSTRAINT `userID` FOREIGN KEY (`id`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `enrolls_to`
+--
+ALTER TABLE `enrolls_to`
+  ADD CONSTRAINT `plan_ID` FOREIGN KEY (`pid`) REFERENCES `plan` (`pid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `user_ID` FOREIGN KEY (`uid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `health_status`
+--
+ALTER TABLE `health_status`
+  ADD CONSTRAINT `uID` FOREIGN KEY (`uid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE NO ACTION;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
